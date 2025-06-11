@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <h1 class="text-4xl font-bold mb-8 text-center">Smart Job Description Generator</h1>
+
+    {% if error %}
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6" role="alert">
+        <strong class="font-bold">Error:</strong>
+        <span class="block sm:inline">{{ error }}</span>
+    </div>
+    {% endif %}
+
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
+        <form action="/generate-job-description" method="post" class="space-y-6">
+            <div>
+                <label for="role" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Job Role/Title:
+                </label>
+                <input
+                    type="text"
+                    id="role"
+                    name="role"
+                    value="{{ role or '' }}"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                    placeholder="e.g., Store Manager, Sales Associate, Inventory Specialist"
+                    required
+                >
+            </div>
+
+            <div>
+                <label for="skills" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Required Skills and Qualifications:
+                </label>
+                <textarea
+                    id="skills"
+                    name="skills"
+                    rows="4"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                    placeholder="List the key skills, experience, and qualifications required for this position..."
+                    required
+                >{{ skills or '' }}</textarea>
+            </div>
+
+            <div>
+                <label for="hours" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Working Hours:
+                </label>
+                <input
+                    type="text"
+                    id="hours"
+                    name="hours"
+                    value="{{ hours or '' }}"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                    placeholder="e.g., Monday-Friday, 9 AM - 5 PM, or Flexible shifts"
+                    required
+                >
+            </div>
+
+            <div class="flex justify-end">
+                <button
+                    type="submit"
+                    class="px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+                >
+                    Generate Job Description
+                </button>
+            </div>
+        </form>
+    </div>
+
+    {% if job_description %}
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-semibold">Generated Job Description</h2>
+            <button
+                onclick="copyToClipboard()"
+                class="px-4 py-2 text-sm bg-gray-100 dark:bg-gray-700 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+            >
+                Copy to Clipboard
+            </button>
+        </div>
+        
+        <div class="prose dark:prose-invert max-w-none" id="jobDescription">
+            {{ job_description | safe }}
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="mt-8 bg-gray-50 dark:bg-gray-900 rounded-lg p-6">
+        <h2 class="text-xl font-semibold mb-4">About the Generator</h2>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">
+            This tool uses IBM's advanced Granite-13b-instruct AI model to generate professional job descriptions
+            tailored for local store positions. The generated descriptions include:
+        </p>
+        <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
+            <li>Compelling job overview</li>
+            <li>Detailed responsibilities</li>
+            <li>Required qualifications and skills</li>
+            <li>Working conditions and benefits</li>
+            <li>Application instructions</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function copyToClipboard() {
+        const jobDescription = document.getElementById('jobDescription').innerText;
+        navigator.clipboard.writeText(jobDescription).then(() => {
+            const button = document.querySelector('button[onclick="copyToClipboard()"]');
+            const originalText = button.innerText;
+            button.innerText = 'Copied!';
+            setTimeout(() => {
+                button.innerText = originalText;
+            }, 2000);
+        });
+    }
+
+    // Add keyboard shortcut (Ctrl+Enter) to submit form
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form');
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                e.preventDefault();
+                form.submit();
+            }
+        });
+    });
+</script>
+{% endblock %} 

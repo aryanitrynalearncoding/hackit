@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto text-center">
+    <h1 class="text-4xl font-bold mb-8">Smart Job Description Generator</h1>
+    
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
+        <h2 class="text-2xl font-semibold mb-4">Create Professional Job Descriptions</h2>
+        <p class="text-gray-600 dark:text-gray-400 mb-6">
+            Generate detailed, professional job descriptions for your local store positions using IBM's advanced AI technology.
+            Save time and create compelling job listings that attract the right candidates.
+        </p>
+        <a
+            href="/generate-job-description"
+            class="inline-block px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+        >
+            Generate Job Description
+        </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
+            <h3 class="text-xl font-semibold mb-3">Easy to Use</h3>
+            <p class="text-gray-600 dark:text-gray-400">
+                Simply enter the job role, required skills, and working hours to generate a professional description.
+            </p>
+        </div>
+        
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
+            <h3 class="text-xl font-semibold mb-3">AI-Powered</h3>
+            <p class="text-gray-600 dark:text-gray-400">
+                Powered by IBM's Granite-13b-instruct model for high-quality, contextually appropriate descriptions.
+            </p>
+        </div>
+        
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
+            <h3 class="text-xl font-semibold mb-3">Time-Saving</h3>
+            <p class="text-gray-600 dark:text-gray-400">
+                Generate complete job descriptions in seconds, ready to use or customize further.
+            </p>
+        </div>
+    </div>
+
+    <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-6">
+        <h2 class="text-2xl font-semibold mb-4">How It Works</h2>
+        <div class="space-y-4 text-left">
+            <div class="flex items-start space-x-4">
+                <div class="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center">1</div>
+                <div>
+                    <p class="font-medium">Enter Job Details</p>
+                    <p class="text-gray-600 dark:text-gray-400">Provide the job role, required skills, and working hours.</p>
+                </div>
+            </div>
+            
+            <div class="flex items-start space-x-4">
+                <div class="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center">2</div>
+                <div>
+                    <p class="font-medium">AI Generation</p>
+                    <p class="text-gray-600 dark:text-gray-400">Our AI model creates a comprehensive job description.</p>
+                </div>
+            </div>
+            
+            <div class="flex items-start space-x-4">
+                <div class="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center">3</div>
+                <div>
+                    <p class="font-medium">Copy & Use</p>
+                    <p class="text-gray-600 dark:text-gray-400">Copy the generated description and use it in your job posting.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

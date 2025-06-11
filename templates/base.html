@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/styles.css') }}">
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <header class="mb-8">
+            <nav class="flex justify-between items-center">
+                <a href="/" class="text-2xl font-bold">AI Web App</a>
+                <div class="space-x-4">
+                    <a href="/" class="hover:text-blue-500">Home</a>
+                    <a href="/ibm-model" class="hover:text-blue-500">IBM AI Model</a>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="mt-16 text-center text-sm text-gray-600 dark:text-gray-400">
+            <div class="flex justify-center space-x-6">
+                <a href="https://github.com/yourusername" class="hover:text-blue-500">GitHub</a>
+                <a href="https://docs.ibm.com" class="hover:text-blue-500">IBM Docs</a>
+                <a href="https://fastapi.tiangolo.com" class="hover:text-blue-500">FastAPI</a>
+            </div>
+            <p class="mt-4">&copy; 2024 AI Web App. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', path='/js/main.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html> 

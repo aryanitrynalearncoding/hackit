@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <h1 class="text-4xl font-bold mb-8 text-center">IBM AI Model</h1>
+
+    {% if error %}
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6" role="alert">
+        <strong class="font-bold">Error:</strong>
+        <span class="block sm:inline">{{ error }}</span>
+    </div>
+    {% endif %}
+
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
+        <form action="/ibm-model/process" method="post" class="space-y-4">
+            <div>
+                <label for="user_input" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Enter your text:
+                </label>
+                <textarea
+                    id="user_input"
+                    name="user_input"
+                    rows="4"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                    placeholder="Type your message here..."
+                    required
+                >{{ user_input or '' }}</textarea>
+            </div>
+
+            <div class="flex justify-end">
+                <button
+                    type="submit"
+                    class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+                >
+                    Process with AI
+                </button>
+            </div>
+        </form>
+    </div>
+
+    {% if model_response %}
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+        <h2 class="text-2xl font-semibold mb-4">AI Response:</h2>
+        <div class="prose dark:prose-invert max-w-none">
+            {{ model_response | safe }}
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="mt-8 bg-gray-50 dark:bg-gray-900 rounded-lg p-6">
+        <h2 class="text-xl font-semibold mb-4">About the Model</h2>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">
+            This application uses IBM's advanced generative AI model to process and respond to your input.
+            The model can help with various tasks including:
+        </p>
+        <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
+            <li>Text generation and completion</li>
+            <li>Question answering</li>
+            <li>Content summarization</li>
+            <li>Code generation and explanation</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Add any JavaScript for enhanced interactivity here
+    document.addEventListener('DOMContentLoaded', function() {
+        const textarea = document.getElementById('user_input');
+        textarea.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                e.preventDefault();
+                this.form.submit();
+            }
+        });
+    });
+</script>
+{% endblock %} 
